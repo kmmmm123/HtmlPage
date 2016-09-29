@@ -90,11 +90,11 @@
     </div>
     <script>
         window.onload = function () {
-            var myCookie = getCookie("h0");
+            var myCookie = getCookie("g0");
             if (myCookie != "") {
                 for (var i = 0; i < 25; i++) {
                     if (i == 12) continue;
-                    document.getElementsByTagName("td")[i].innerHTML = getCookie("h" + i);
+                    document.getElementsByTagName("td")[i].innerHTML = getCookie("g" + i);
                 }
                 return;
             }
@@ -117,7 +117,7 @@
                 var d = new Date();
                 d.setTime(d.getTime() + (300 * 1000));
                 var expires = "expires=" + d.toUTCString();
-                document.cookie = "h" + i + "=" + temp + "; " + expires;
+                document.cookie = "g" + i + "=" + temp + "; " + expires;
             }
         }
 
