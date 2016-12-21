@@ -146,14 +146,12 @@
     </div>
     <button class="btn btn-info" style="font-size:80px;width:100%;" onclick="myReset()">重設</button>
     <script>
-            var bingo_array={};
             window.onload = function() {
                 for (var i = 0; i < 75; i++) {
-                    if(getCookie("h" + i) != ""){
+                    if(getCookie("h" + i) !== ""){
                         document.getElementsByTagName("td")[i].style.backgroundColor = getCookie("h" + i);
-                        bingo_array[i] = true;
-                    }else{
-                        bingo_array[i] = false;
+                    } else {
+                        document.getElementsByTagName("td")[i].style.backgroundColor = "white";
                     }
                 }
             }
@@ -171,7 +169,6 @@
                 for (i = 0; i < 75; i++) {
                     document.getElementsByTagName("td")[i].style.backgroundColor = "white";
                     document.cookie = "h" + i + "=" + "white";
-                    bingo_array[i] = false;
                 }
                 document.getElementById("b1").innerHTML = "抽籤";
             }
@@ -181,18 +178,17 @@
                     count = 0,
                     r = 0;
                 for (i = 0; i < 75; i++) {
-                    if (bingo_array[i] === false) {
+                    if (document.getElementsByTagName("td")[i].style.backgroundColor === "white") {
                         count++;
                     }
                 }
                 r = Math.floor(Math.random() * count);
                 for (i = 0; i < 75; i++) {
-                    if (bingo_array[i] === false) {
-                        if (r == 0) {
+                    if (document.getElementsByTagName("td")[i].style.backgroundColor === "white") {
+                        if (r === 0) {
                             document.getElementsByTagName("td")[i].style.backgroundColor = "#ff4d4d";
                             document.cookie = "h" + i + "=" + "#ff4d4d";
                             document.getElementById("b1").innerHTML = "抽籤(" + (i + 1) + ")";
-                            bingo_array[i] = true;
                             break;
                         } else {
                             r--;
@@ -206,8 +202,8 @@
                 var ca = document.cookie.split(';');
                 for (var i = 0; i < ca.length; i++) {
                     var c = ca[i];
-                    while (c.charAt(0) == ' ') c = c.substring(1);
-                    if (c.indexOf(name) == 0) {
+                    while (c.charAt(0) === ' ') c = c.substring(1);
+                    if (c.indexOf(name) === 0) {
                         return c.substring(name.length, c.length);
                     }
                 }
